@@ -44,7 +44,7 @@
 	<description>Framework d'aide a la gestion de la messagerie dans les applcations multimodulaire.</description>
 	
 	<!-- Project Version -->
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	
 	<!-- Packaging -->
 	<packaging>pom</packaging>
@@ -231,7 +231,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
