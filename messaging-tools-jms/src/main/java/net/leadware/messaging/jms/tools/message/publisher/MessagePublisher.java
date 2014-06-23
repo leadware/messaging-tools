@@ -32,7 +32,7 @@ import net.leadware.messaging.jms.tools.message.ApplicationMessage;
 /**
  * Classe representant l'interface du producteur de message Applicatif
  * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
- * @since 8 dŽc. 2013 - 15:56:45
+ * @since 8 dï¿½c. 2013 - 15:56:45
  */
 public interface MessagePublisher {
 	
@@ -48,4 +48,22 @@ public interface MessagePublisher {
 	 * @param destination Destination du message
 	 */
 	public void publish(ApplicationMessage<? extends Serializable> message, Destination destination);
+
+	/**
+	 * Methode de mise a jour du nom d'utilisateur 
+	 * @param userName	Nom d'utilisateur
+	 */
+	public void setUserName(String userName);
+
+	/**
+	 * Methode de mise a jour du nom d'utilisateur 
+	 * @param userName	Nom d'utilisateur
+	 */
+	public void setPassword(String password);
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "securityEnabled"
+	 * @param securityEnabled Nouvelle valeur du champ "securityEnabled"
+	 */
+	public void setSecurityEnabled(boolean securityEnabled);
 }

@@ -25,15 +25,40 @@ package net.leadware.messaging.jms.tools.message;
  * #L%
  */
 
-/**
- * Classe repr√©sentant le type de message JMS Applicatif
- * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
- * @since 8 déc. 2013 - 15:33:57
- */
-public enum ApplicationMessageType {
+import java.io.Serializable;
 
+/**
+ * Interface representant le type de message 
+ * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
+ * @since 23 juin 2014 - 03:59:20
+ */
+public interface ApplicationMessageType extends Serializable {
+	
 	/**
-	 * Default ApplicationMessage Type
+	 * Type de message par defaut
 	 */
-	DEFAULT_MESSAGE_TYPE
+	public static final ApplicationMessageType DEFAULT_MESSAGE_TYPE = new ApplicationMessageType() {
+		
+		/**
+		 * ID Genere par eclipse
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		/*
+		 * (non-Javadoc)
+		 * @see net.leadware.messaging.jms.tools.message.ApplicationMessageType#name()
+		 */
+		@Override
+		public String name() {
+			
+			// On retourne la valeur par defaut
+			return "APP_DEFAULT_MESSAGE_TYPE";
+		}
+	};
+	
+	/**
+	 * Methode permettant de retourner le nom de la propriete
+	 * @return	Nom de la propriete
+	 */
+	public String name();
 }

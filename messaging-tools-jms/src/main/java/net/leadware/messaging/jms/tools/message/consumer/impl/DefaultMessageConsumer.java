@@ -48,7 +48,7 @@ import org.apache.log4j.Logger;
 /**
  * Classe representant l'implementation par defaut du consommateur de message JMS Applicatif
  * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
- * @since 8 dŽc. 2013 - 15:37:33
+ * @since 8 dï¿½c. 2013 - 15:37:33
  */
 public class DefaultMessageConsumer implements MessageConsumer {
 
@@ -66,7 +66,16 @@ public class DefaultMessageConsumer implements MessageConsumer {
 	 * Contexte JNDI
 	 */
 	private Context context;
-
+	
+	/**
+	 * Constructeur par defaut
+	 */
+	public DefaultMessageConsumer() {
+		
+		// Instanciation du template
+		jmsTemplate = new JmsTemplate();
+	}
+	
 	/**
 	 * Constructeur avec initialisation des parametres
 	 * @param connectionFactory	Fabrique de connection
@@ -84,6 +93,7 @@ public class DefaultMessageConsumer implements MessageConsumer {
 	 * Constructeur avec initialisation des parametres
 	 * @param configuration Configuration
 	 */
+	@Deprecated
 	public DefaultMessageConsumer(Configuration configuration) {
 		
 		// Initialisation du contexte
@@ -95,7 +105,64 @@ public class DefaultMessageConsumer implements MessageConsumer {
 		// Construction du template JMS
 		this.jmsTemplate = new JmsTemplate(connectionFactory);
 	}
+
+	/**
+	 * Constructeur avec initialisation des parametres
+	 * @param configuration Configuration
+	 * @param context Contexte jndi
+	 */
+	public DefaultMessageConsumer(Configuration configuration, Context context) {
+		
+		// Initialisation du contexte
+		this.context = context;
+		
+		// Fabrique de connexion
+		ConnectionFactory connectionFactory = ConnectionFactoryBuilderHelper.buildConnectionfactory(configuration, this.context);
+		
+		// Construction du template JMS
+		this.jmsTemplate = new JmsTemplate(connectionFactory);
+	}
 	
+	/**
+	 * Methode permettant de modifier la valeur du champ "userName"
+	 * @param userName Nouvelle valeur du champ "userName"
+	 */
+	public void setUserName(String userName) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setUserName(userName);
+	}
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "password"
+	 * @param password Nouvelle valeur du champ "password"
+	 */
+	public void setPassword(String password) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setPassword(password);
+	}
+
+	/**
+	 * Methode permettant de modifier la valeur du champ "securityEnabled"
+	 * @param securityEnabled Nouvelle valeur du champ "securityEnabled"
+	 */
+	public void setSecurityEnabled(boolean securityEnabled) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setSecurityEnabled(securityEnabled);
+	}
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "connectionFactory"
+	 * @param connectionFactory Nouvelle valeur du champ "connectionFactory"
+	 */
+	public void setConnectionFactory(ConnectionFactory connectionFactory) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setConnectionFactory(connectionFactory);
+	}
+
 	@Override
 	public ApplicationMessage<? extends Serializable> receive(Destination destination, String messageSelector) {
 		

@@ -35,7 +35,7 @@ import net.leadware.messaging.jms.tools.message.consumer.listener.ApplicationMes
 /**
  * Classe l'interface du consomateur de message JMS Applicatif
  * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
- * @since 8 dŽc. 2013 - 15:37:00
+ * @since 8 dï¿½c. 2013 - 15:37:00
  */
 public interface MessageConsumer {
 	
@@ -127,4 +127,22 @@ public interface MessageConsumer {
 	 * @return Thread de reception asynchrone
 	 */
 	public AsyncReceive listen(String destination, ApplicationMessageListener messageListener, Map<String, String> selectorProperties);
+	
+	/**
+	 * Methode de mise a jour du nom d'utilisateur 
+	 * @param userName	Nom d'utilisateur
+	 */
+	public void setUserName(String userName);
+
+	/**
+	 * Methode de mise a jour du nom d'utilisateur 
+	 * @param userName	Nom d'utilisateur
+	 */
+	public void setPassword(String password);
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "securityEnabled"
+	 * @param securityEnabled Nouvelle valeur du champ "securityEnabled"
+	 */
+	public void setSecurityEnabled(boolean securityEnabled);
 }

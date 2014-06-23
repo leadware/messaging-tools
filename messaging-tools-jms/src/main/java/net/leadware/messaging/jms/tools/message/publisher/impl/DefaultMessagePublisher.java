@@ -41,7 +41,7 @@ import org.apache.log4j.Logger;
 /**
  * Classe representant le producteur de message Applicatif par defaut 
  * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
- * @since 8 dŽc. 2013 - 15:57:23
+ * @since 8 dï¿½c. 2013 - 15:57:23
  */
 public class DefaultMessagePublisher implements MessagePublisher {
 	
@@ -61,6 +61,15 @@ public class DefaultMessagePublisher implements MessagePublisher {
 	private Context context;
 
 	/**
+	 * Constructeur par defaut
+	 */
+	public DefaultMessagePublisher() {
+		
+		// Instanciation du template
+		jmsTemplate = new JmsTemplate();
+	}
+	
+	/**
 	 * Constructeur avec initialisation des parametres
 	 * @param connectionFactory	Fabrique de connection
 	 */
@@ -77,6 +86,7 @@ public class DefaultMessagePublisher implements MessagePublisher {
 	 * Constructeur avec initialisation des parametres
 	 * @param configuration Configuration
 	 */
+	@Deprecated
 	public DefaultMessagePublisher(Configuration configuration) {
 
 		// Initialisation du contexte
@@ -87,6 +97,63 @@ public class DefaultMessagePublisher implements MessagePublisher {
 		
 		// Construction du template JMS
 		this.jmsTemplate = new JmsTemplate(connectionFactory);
+	}
+
+	/**
+	 * Constructeur avec initialisation des parametres
+	 * @param configuration Configuration
+	 * @param context Contexte jndi
+	 */
+	public DefaultMessagePublisher(Configuration configuration, Context context) {
+		
+		// Initialisation du contexte
+		this.context = context;
+		
+		// Fabrique de connexion
+		ConnectionFactory connectionFactory = ConnectionFactoryBuilderHelper.buildConnectionfactory(configuration, this.context);
+		
+		// Construction du template JMS
+		this.jmsTemplate = new JmsTemplate(connectionFactory);
+	}
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "userName"
+	 * @param userName Nouvelle valeur du champ "userName"
+	 */
+	public void setUserName(String userName) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setUserName(userName);
+	}
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "password"
+	 * @param password Nouvelle valeur du champ "password"
+	 */
+	public void setPassword(String password) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setPassword(password);
+	}
+
+	/**
+	 * Methode permettant de modifier la valeur du champ "securityEnabled"
+	 * @param securityEnabled Nouvelle valeur du champ "securityEnabled"
+	 */
+	public void setSecurityEnabled(boolean securityEnabled) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setSecurityEnabled(securityEnabled);
+	}
+	
+	/**
+	 * Methode permettant de modifier la valeur du champ "connectionFactory"
+	 * @param connectionFactory Nouvelle valeur du champ "connectionFactory"
+	 */
+	public void setConnectionFactory(ConnectionFactory connectionFactory) {
+	
+		// Mise a jour du template
+		this.jmsTemplate.setConnectionFactory(connectionFactory);
 	}
 
 	/*

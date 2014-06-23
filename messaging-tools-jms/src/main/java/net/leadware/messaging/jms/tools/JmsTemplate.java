@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
 /**
  * Classe representant le template d'envoie/reception de message via JMS 
  * @author <a href="mailto:jetune@leadware.net">Jean-Jacques ETUNE NGI</a>
- * @since 8 déc. 2013 - 15:22:14
+ * @since 8 dec. 2013 - 15:22:14
  */
 public class JmsTemplate {
 	
@@ -103,6 +103,21 @@ public class JmsTemplate {
 	 * Timeout de reception
 	 */
 	private long receiveTimeout = RECEIVE_TIMEOUT_INDEFINITE_WAIT;
+	
+	/**
+	 * Nom d'utilisateur
+	 */
+	private String userName;
+	
+	/**
+	 * Mot de passe
+	 */
+	private String password;
+	
+	/**
+	 * Etat de securite active
+	 */
+	private boolean securityEnabled = false;
 	
 	/**
 	 * Constructeur par defaut
@@ -301,11 +316,76 @@ public class JmsTemplate {
 	}
 	
 	/**
+	 * Methode permettant d'obtenir la valeur du champ "userName"
+	 * @return valeur du champ "userName"
+	 */
+	public String getUserName() {
+	
+		// On retourne la valeur du champ
+		return userName;
+	}
+
+	/**
+	 * Methode permettant de modifier la valeur du champ "userName"
+	 * @param userName Nouvelle valeur du champ "userName"
+	 */
+	public void setUserName(String userName) {
+	
+		// Mise a jour de la valeur du champ
+		this.userName = userName;
+	}
+
+	/**
+	 * Methode permettant d'obtenir la valeur du champ "password"
+	 * @return valeur du champ "password"
+	 */
+	public String getPassword() {
+	
+		// On retourne la valeur du champ
+		return password;
+	}
+
+	/**
+	 * Methode permettant de modifier la valeur du champ "password"
+	 * @param password Nouvelle valeur du champ "password"
+	 */
+	public void setPassword(String password) {
+	
+		// Mise a jour de la valeur du champ
+		this.password = password;
+	}
+
+	/**
+	 * Methode permettant d'obtenir la valeur du champ "securityEnabled"
+	 * @return valeur du champ "securityEnabled"
+	 */
+	public boolean isSecurityEnabled() {
+	
+		// On retourne la valeur du champ
+		return securityEnabled;
+	}
+
+	/**
+	 * Methode permettant de modifier la valeur du champ "securityEnabled"
+	 * @param securityEnabled Nouvelle valeur du champ "securityEnabled"
+	 */
+	public void setSecurityEnabled(boolean securityEnabled) {
+	
+		// Mise a jour de la valeur du champ
+		this.securityEnabled = securityEnabled;
+	}
+
+	/**
 	 * Methode de creation d'une connection
 	 * @return	Connection creee
 	 * @throws JMSException Exception potentielle
 	 */
 	public Connection createConnection() throws JMSException {
+		
+		// Si la securite est activee
+		if(securityEnabled) return connectionFactory.createConnection(userName, password);
+		
+		// Sinon
 		return connectionFactory.createConnection();
 	}
 	
